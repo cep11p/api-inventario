@@ -199,6 +199,8 @@ class InventarioSearch extends Inventario
     */
     public function search($params)
     {
+        ini_set('memory_limit', '1024M');
+
         $query = Inventario::find();
         $pagesize = (!isset($params['pagesize']) || !is_numeric($params['pagesize']) || $params['pagesize']==0)?20:intval($params['pagesize']);
         

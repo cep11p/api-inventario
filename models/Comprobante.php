@@ -44,6 +44,8 @@ class Comprobante extends BaseComprobante
 
     #Registramos los items reutilizando los registros que se puedan
     private function reutilizarRegistros($producto){
+
+        ini_set('memory_limit', '1024M');
         
         $query = new Query();
         
@@ -192,8 +194,7 @@ class Comprobante extends BaseComprobante
         
         $lista_producto = $param['lista_producto'];
         $productos_registrados = $this->getListaProducto();
-
-        // print_r($productos_registrados);die();
+        
         $resultado = [];
 
         #### Calculamos las cantidades a registrar y a borrar ####

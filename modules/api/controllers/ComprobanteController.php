@@ -183,7 +183,7 @@ class ComprobanteController extends ActiveController{
         }
     }
 
-    public function actionSetDescripcion($id) {
+    public function actionEditarObservacion($id) {
         
         if (!\Yii::$app->user->can('comprobante_modificar')) {
             throw new \yii\web\HttpException(403, 'No se tienen permisos necesarios para ejecutar esta acción');

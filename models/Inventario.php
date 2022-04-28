@@ -124,6 +124,8 @@ class Inventario extends BaseInventario
      * @throws Exception
      */
     public function setItemDefectuoso($param) {
+
+        ini_set('memory_limit', '1024M');
         
         if(!isset($param['productoid']) || empty($param['productoid'])){
             throw new Exception('Se requiere el atributo productoid');
@@ -178,43 +180,6 @@ class Inventario extends BaseInventario
         }
         
         return $ids;
-    }
-    
-    /**
-     * Se modifican los productos de un comprobante
-     *
-     * @param [type] $comprobanteid
-     * @param [type] $param
-     * @return void
-     */
-    private function modificarProductoComprobante($comprobanteid, $param) {
-        print_r($param);die();
-
-        $new_stock = array();
-        if(!isset($param['lista_producto']) || count($param['lista_producto'])<=0){
-            throw new Exception('Falta lista de productos');
-        }
-        $item_ids = array();
-        foreach ($param['lista_producto'] as $item) {
-            if(!is_numeric($item['cantidad']) || intval($item['cantidad'])<=0){
-                throw new Exception('La cantidad debe ser un numero y mayor a 0');
-            }
-            
-            
-            $item_ids[] = $item['id'];
-        }
-        
-        #Pedimos la lista de items
-        $lista_item = Inventario::find()->where(['id' => $item_ids])->asArray()->all();
-        print_r($item_ids);die();
-
-
-
-        #Creamos el sql para registros masivos
-        // $query = new Query();
-        // $resultado = $query->createCommand()->batchInsert('inventario', ['comprobanteid', 'productoid', 'fecha_vencimiento', 'precio_unitario', 'defectuoso', 'egresoid', 'depositoid', 'id', 'falta'], $new_stock)->execute();
-        
-        // return $resultado;
     }
     
     /**
